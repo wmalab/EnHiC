@@ -17,6 +17,14 @@
 
 ##  Setup
 
+**Anaconda Pyrhon**
+
+We provide a Conda environment for running EnHiC, use the environment.yaml file, which will install all required dependencies:
+> conda env create -f environment.yaml
+
+Activate the new environment: 
+>conda activate env_EnHiC 
+
 ---
 
 ##  Data Preparation
@@ -28,5 +36,7 @@
 ---
 
 ##  Demo Test
+
+**Training**
 
 ---

@@ -54,7 +54,7 @@ def check_scn(X, normX, D):
     print("sum of axis1: ", (normX**2).sum(axis=1))
 
 
-def redircwd_back_projroot(project_name='refine_resolution'):
+def redircwd_back_projroot(project_name='EnHiC'):
     root = os.getcwd().split('/')
     for i, f in enumerate(root):
         if f == project_name:

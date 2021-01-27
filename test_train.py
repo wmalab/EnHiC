@@ -60,7 +60,7 @@ if __name__ == '__main__':
     genomic_distance = int(sys.argv[2])  # 2000000, 2560000
     EPOCHS = 1
     BATCH_SIZE = 4
-    root_path = redircwd_back_projroot(project_name='refine_resolution')
+    root_path = redircwd_back_projroot(project_name='EnHiC')
     data_path = os.path.join(root_path, 'data')
     raw_hic = 'Rao2014-GM12878-DpnII-allreps-filtered.10kb.cool'
     # raw_hic = 'Rao2014-GM12878-MboI-allreps-filtered.10kb.cool'

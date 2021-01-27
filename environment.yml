@@ -1,0 +1,16 @@
+name: env_EnHiC
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.6
+  - pip
+  - numpy
+  - cooler
+  - imageio
+  - ipython
+  - pip:
+    - matplotlib
+    - wget
+  - tensorflow-gpu

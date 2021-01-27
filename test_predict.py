@@ -205,7 +205,7 @@ def run(path='./data',
 if __name__ == '__main__':
     chromosome = str(sys.argv[1]) # '22'
     len_size = int(sys.argv[2])  # 200
-    max_dis = 2000000
+    max_dis = int(sys.argv[3]) # 2000000
 
     root_dir = operations.redircwd_back_projroot( project_name='EnHiC')
     raw_hic = 'Rao2014-GM12878-DpnII-allreps-filtered.10kb.cool'

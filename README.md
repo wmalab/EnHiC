@@ -53,14 +53,23 @@ We provide the API function for training data in EnHiC/fit.py
 > def train(train_data, valid_data, len_size, scale, EPOCHS, root_path='./', load_model_dir=None, saved_model_dir=None, log_dir=None, summary=False)
 > 
 > __train_data__: Tensor in format of tensorflow Dataset (None, len_size, len_size, 1) e.g.(None, 400, 400, 1)
+> 
 > __valid_data__: Tensor in format of tensorflow Dataset (None, len_size, len_size, 1) e.g.(None, 400, 400, 1)
+> 
 > __len_size__: default: 400. The size of sample must be multiples of 4. e.g. 100, 200, 400.
+> 
 > __scale__: the scale of resolution to enhance, e.g. 40kb->10kb: 4, 100kb->10kb: 10
+> 
 > __EPOCHS__: number of steps, e.g. 300
-> __root_path__: the directory that to save/load model and log,
+> 
+> __root_path__: the directory that to save/load model and log
+> 
 > __load_model_dir__: the directory to load exsiting model to continue the training, default is None which means to build a new one 
+> 
 > __saved_model_dir__: the directory to save model, if it None. The model will be save to root_path/saved_model/gen_model_[len_size]/gen_weights or root_path/saved_model/dis_model_[len_size]/dis_weights
+> 
 > __log_dir__: the directory to save model, if it None. The model will be save to root_path/logs
+> 
 > __summary__: print the summary of model, default is False
 
 ```

@@ -1,6 +1,5 @@
 # EnHiC: Learning fine-resolution Hi-C contact maps using a generative adversarial framework
 
----
 
 - [EnHiC: Learning fine-resolution Hi-C contact maps using a generative adversarial framework](#enhic-learning-fine-resolution-hi-c-contact-maps-using-a-generative-adversarial-framework)
   - [About](#about)
@@ -10,7 +9,6 @@
   - [Traning and Prediction](#traning-and-prediction)
   - [Demo Test](#demo-test)
 
----
 
 ## About
 
@@ -53,8 +51,8 @@ operations.merge_hic(hic_lists, index_1D_2D, max_distance=None)
 **Training**
 We provide the API function for training data in EnHiC/fit.py
 > def train(train_data, valid_data, len_size, scale, EPOCHS, root_path='./', load_model_dir=None, saved_model_dir=None, log_dir=None, summary=False)
->> 
->> __train_data__: Tensor in format of tensorflow Dataset (None, len_size, len_size, 1) e.g.(None, 400, 400, 1)
+> 
+> __train_data__: Tensor in format of tensorflow Dataset (None, len_size, len_size, 1) e.g.(None, 400, 400, 1)
 > __valid_data__: Tensor in format of tensorflow Dataset (None, len_size, len_size, 1) e.g.(None, 400, 400, 1)
 > __len_size__: default: 400. The size of sample must be multiples of 4. e.g. 100, 200, 400.
 > __scale__: the scale of resolution to enhance, e.g. 40kb->10kb: 4, 100kb->10kb: 10
@@ -78,7 +76,7 @@ We provide the API function for prediction in EnHiC/fit.py
 
 > def predict(model_path, len_size, scale, ds)
 >
-> >__model_path__: the directory to load exsiting generator model e.g. saved_model/gen_model_[len_size]/gen_weights
+>__model_path__: the directory to load exsiting generator model e.g. saved_model/gen_model_[len_size]/gen_weights
 > __len_size__: default: 400. The size of sample must be multiples of 4. e.g. 100, 200, 400.
 > __scale__: the scale of resolution to enhance, e.g. 40kb->10kb: 4, 100kb->10kb: 10
 > __ds__: Tensor in format of tensorflow Dataset (None, len_size, len_size, 1) e.g.(None, 400, 400, 1)

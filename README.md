@@ -51,27 +51,17 @@ operations.merge_hic(hic_lists, index_1D_2D, max_distance=None)
 ##  Traning and Prediction
 **Training**
 We provide the API function for training data in EnHiC/fit.py
-> def train(train_data, valid_data, len_size, scale, EPOCHS, root_path='./', load_model_dir=None, saved_model_dir=None, log_dir=None, summary=False)
-> 
-> __train_data__: Tensor in format of tensorflow Dataset (None, len_size, len_size, 1) e.g.(None, 400, 400, 1)
-> 
-> __valid_data__: Tensor in format of tensorflow Dataset (None, len_size, len_size, 1) e.g.(None, 400, 400, 1)
-> 
-> __len_size__: default: 400. The size of sample must be multiples of 4. e.g. 100, 200, 400.
-> 
-> __scale__: the scale of resolution to enhance, e.g. 40kb->10kb: 4, 100kb->10kb: 10
-> 
-> __EPOCHS__: number of steps, e.g. 300
-> 
-> __root_path__: the directory that to save/load model and log
-> 
-> __load_model_dir__: the directory to load exsiting model to continue the training, default is None which means to build a new one 
-> 
-> __saved_model_dir__: the directory to save model, if it None. The model will be save to root_path/saved_model/gen_model_[len_size]/gen_weights or root_path/saved_model/dis_model_[len_size]/dis_weights
-> 
-> __log_dir__: the directory to save model, if it None. The model will be save to root_path/logs
-> 
-> __summary__: print the summary of model, default is False
+> def train(train_data, valid_data, len_size, scale, EPOCHS, root_path='./', load_model_dir=None, saved_model_dir=None, log_dir=None, summary=False)<br/>
+> __train_data__: Tensor in format of tensorflow Dataset (None, len_size, len_size, 1) e.g.(None, 400, 400, 1)<br/>
+> __valid_data__: Tensor in format of tensorflow Dataset (None, len_size, len_size, 1) e.g.(None, 400, 400, 1)<br/>
+> __len_size__: default: 400. The size of sample must be multiples of 4. e.g. 100, 200, 400.<br/>
+> __scale__: the scale of resolution to enhance, e.g. 40kb->10kb: 4, 100kb->10kb: 10<br/>
+> __EPOCHS__: number of steps, e.g. 300<br/>
+> __root_path__: the directory that to save/load model and log<br/>
+> __load_model_dir__: the directory to load exsiting model to continue the training, default is None which means to build a new one <br/>
+> __saved_model_dir__: the directory to save model, if it None. The model will be save to root_path/saved_model/gen_model_[len_size]/gen_weights or root_path/saved_model/dis_model_[len_size]/dis_weights <br/>
+> __log_dir__: the directory to save model, if it None. The model will be save to root_path/logs <br/>
+> __summary__: print the summary of model, default is False<br/>
 
 ```
 from EnHiC import fit
@@ -86,10 +76,10 @@ We provide the API function for prediction in EnHiC/fit.py
 
 > def predict(model_path, len_size, scale, ds)
 >
->__model_path__: the directory to load exsiting generator model e.g. saved_model/gen_model_[len_size]/gen_weights
-> __len_size__: default: 400. The size of sample must be multiples of 4. e.g. 100, 200, 400.
-> __scale__: the scale of resolution to enhance, e.g. 40kb->10kb: 4, 100kb->10kb: 10
-> __ds__: Tensor in format of tensorflow Dataset (None, len_size, len_size, 1) e.g.(None, 400, 400, 1)
+>__model_path__: the directory to load exsiting generator model e.g. saved_model/gen_model_[len_size]/gen_weights <br/>
+> __len_size__: default: 400. The size of sample must be multiples of 4. e.g. 100, 200, 400. <br/>
+> __scale__: the scale of resolution to enhance, e.g. 40kb->10kb: 4, 100kb->10kb: 10 <br/>
+> __ds__: Tensor in format of tensorflow Dataset (None, len_size, len_size, 1) e.g.(None, 400, 400, 1) <br/>
 
 ```
 from EnHiC import fit
@@ -121,6 +111,7 @@ __Example__:
 **Training**
 The script _test_train.py_ trains the dataset. The EPOCHS, BATCH_SIZE and chromosome list for training and validation are all configured in the script. It calls _fit.train_ after loading training data.
 As a demo, EPOCHS=100, BATCH_SIZE=9, train_chr_list=['22']
+
 __Usage__:
 > test_train.py [len_size] [genomic_distance]
 > len_size: default: 400. The size of sample must be multiples of 4. e.g. 100, 200, 400.

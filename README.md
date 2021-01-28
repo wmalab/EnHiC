@@ -8,6 +8,7 @@
   - [Data Preparation](#data-preparation)
   - [Traning and Prediction](#traning-and-prediction)
   - [Demo Test](#demo-test)
+  - [TensorBoard](#tensorboard)
 
 
 ## About
@@ -140,6 +141,14 @@ The script test_predict.py shows the demo to predict Hi-C low resoltion by EnHiC
 __Example__:
 ```
 > (env_EnHiC)>> python test_predict.py 22 400 2000000
+```
+
+## TensorBoard
+We log training data and visualize it by [TensorBoard](https://www.tensorflow.org/tensorboard/get_started).
+```
+tensorboard --logdir=[pathto]/EnHiC/logs/model/
+or 
+tensorboard --logdir=[pathto]/EnHiC/logs/model/ --port=${port} --host=${node} --samples_per_plugin images=50
 ```
 
 ---

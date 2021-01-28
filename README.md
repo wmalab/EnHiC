@@ -50,7 +50,7 @@ operations.merge_hic(hic_lists, index_1D_2D, max_distance=None)
 ---
 
 ##  Traning and Prediction
-We provide the trained model for data _Rao2014-GM12878-MboI-allreps-filtered.10kb.cool_ at _./pretrained_model/_ with 3 length size (80, 200, 400)
+We provide the trained model for data _Rao2014-GM12878-MboI-allreps-filtered.10kb.cool_ at _./pretrained_model/_ with 3 sizes (80, 200, 400)
 
 **Example**
 ```

@@ -19,6 +19,7 @@ We develop a new GAN-based model, namely EnHiC, to enhance the resolution of Hi-
 ## TODO
 
 - [ ] Keep updating the document and cleaning code 
+- [ ] Fix the format in GitHub markdown
 
 ---
 
@@ -98,16 +99,18 @@ fit.predict(model_path = mpath, len_size=400, scale=4, ds)
 ---
 
 ##  Demo Test
-We shows the Demo based on _Rao2014-GM12878-MboI-allreps-filtered.10kb.cool_ (same in our paper, around 1.5Gb)
+
+We shows the Demo based on _Rao2014-GM12878-MboI-allreps-filtered.10kb.cool_ (same in our paper, around 1.5Gb)<br/>
+
 **Data preprocessing**
 The script _test_preprocessing.py_ prepares the dataset for training. if file doesn't exsit, the script will download it from ftp://cooler.csail.mit.edu/coolers/hg19/ to _[pathto]/EnHiC/data/raw/Rao2014-GM12878-MboI-allreps-filtered.10kb.cool_
 
 Then the script will call _[pathto]/EnHiC/EnHiC/prepare_data.py_ to divide the Hi-C matrix into samples in the size of $( len\_size \times len\_size)$ within the $genomice\_distance$. The samples are saved at _[pathto]/EnHiC/data/_ .
 __Usage__:
 > test_preprocessing.py [chromosome] [len_size] [genomic_distance]
-> __chromosome__: the index of chromosome. e.g. 1, 2, 3, ... , 22, X
-> __len_size__: default: 400. The size of sample must be multiples of 4. e.g. 100, 200, 400.
-> __genomic_distance__: default 2000000 (2Mb)
+> __chromosome__: the index of chromosome. e.g. 1, 2, 3, ... , 22, X <br/>
+> __len_size__: default: 400. The size of sample must be multiples of 4. e.g. 100, 200, 400.<br/>
+> __genomic_distance__: default 2000000 (2Mb) <br/>
 
 __Example__:
 ```

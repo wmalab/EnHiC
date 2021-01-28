@@ -208,8 +208,8 @@ if __name__ == '__main__':
     max_dis = int(sys.argv[3]) # 2000000
 
     root_dir = operations.redircwd_back_projroot( project_name='EnHiC')
-    raw_hic = 'Rao2014-GM12878-DpnII-allreps-filtered.10kb.cool'
-    # raw_hic = 'Rao2014-GM12878-MboI-allreps-filtered.10kb.cool'
+    # raw_hic = 'Rao2014-GM12878-DpnII-allreps-filtered.10kb.cool'
+    raw_hic = 'Rao2014-GM12878-MboI-allreps-filtered.10kb.cool'
 
     run(path=os.path.join(root_dir, 'data'),
         raw_path='raw',

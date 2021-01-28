@@ -39,8 +39,7 @@ def predict(path='./data',
 
     # get generator model
     if model_path is None:
-        gan_model_weights_path = './our_model/saved_model/gen_model_' + \
-            str(len_size)+'/gen_weights'
+        gan_model_weights_path = './saved_model/gen_model_' + str(len_size)+'/gen_weights'
     else:
         gan_model_weights_path = model_path
     Generator = model.make_generator_model(len_high_size=len_size, scale=4)
@@ -219,7 +218,7 @@ def predict(path='./data',
 
 
 if __name__ == '__main__':
-    root = operations.redircwd_back_projroot(project_name='refine_resolution')
+    root = operations.redircwd_back_projroot(project_name='EnHiC')
     data_path = os.path.join(root, 'data')
     max_dis = 2000000
     len_size = 200
@@ -231,5 +230,5 @@ if __name__ == '__main__':
             chromosome='22',
             scale=4,
             len_size=200,
-            sr_path='_'.join(['output', 'ours', str(max_dis), str(len_size)]),
+            sr_path='_'.join(['output', 'EnHiC', str(max_dis), str(len_size)]),
             genomic_distance=2000000, start=0, end=None, draw_out=True)

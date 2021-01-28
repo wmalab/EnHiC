@@ -4,6 +4,7 @@
 
 - [EnHiC: Learning fine-resolution Hi-C contact maps using a generative adversarial framework](#enhic-learning-fine-resolution-hi-c-contact-maps-using-a-generative-adversarial-framework)
   - [About](#about)
+  - [TODO](#todo)
   - [Setup](#setup)
   - [Data Preparation](#data-preparation)
   - [Traning and Prediction](#traning-and-prediction)
@@ -12,6 +13,14 @@
 ---
 
 ## About
+
+We develop a new GAN-based model, namely EnHiC, to enhance the resolution of Hi-C contact frequency matrices. Specifically, we propose a novel convolutional layer _Decomposition & Reconstruction Block_ which accounts for the non-negative symmetric property of Hi-C matrices. In our GAN framework, the generator extracts rank-1 features from different scales of low-resolution matrices and predicts the high-resolution matrix via subpixel CNN layers.
+
+---
+
+## TODO
+
+- [ ] Keep updating the document and cleaning code 
 
 ---
 
@@ -29,25 +38,107 @@ Activate the new environment:
 
 ##  Data Preparation
 
+As we described in the paper, our model require the input samples are symmeric.
+> The EnHiC divides the Hi-C matrix into non-overlapping sub-matrices in size of $\frac{n}{2} \times \frac{n}{2}$ and then pick out 3 sub-matrices(2 on the diagonal and 1 off diagonal) to combine one sub-matrix in size of $n \times n$. For example, the 2 sub-matrices on the diagonal are $(i,i)$ and $(j,j)$ and the off diagonal sub-matrix is $(i,j)$ so that all $n \times n$ sub-matrices are symmetric. In this section, we select $n=400$ for EnHiC.
+
+We provide funtions in utils/operations.py， more details please check the demo test.
+```
+operations.divide_pieces_hic(hic_matrix, block_size=400, max_distance=None, save_file=False, pathfile=None)
+operations.merge_hic(hic_lists, index_1D_2D, max_distance=None)
+```
+
 ---
 
 ##  Traning and Prediction
+**Training**
+We provide the API function for training data in EnHiC/fit.py
+> def train(train_data, valid_data, len_size, scale, EPOCHS, root_path='./', load_model_dir=None, saved_model_dir=None, log_dir=None, summary=False)
+>> 
+>> __train_data__: Tensor in format of tensorflow Dataset (None, len_size, len_size, 1) e.g.(None, 400, 400, 1)
+> __valid_data__: Tensor in format of tensorflow Dataset (None, len_size, len_size, 1) e.g.(None, 400, 400, 1)
+> __len_size__: default: 400. The size of sample must be multiples of 4. e.g. 100, 200, 400.
+> __scale__: the scale of resolution to enhance, e.g. 40kb->10kb: 4, 100kb->10kb: 10
+> __EPOCHS__: number of steps, e.g. 300
+> __root_path__: the directory that to save/load model and log,
+> __load_model_dir__: the directory to load exsiting model to continue the training, default is None which means to build a new one 
+> __saved_model_dir__: the directory to save model, if it None. The model will be save to root_path/saved_model/gen_model_[len_size]/gen_weights or root_path/saved_model/dis_model_[len_size]/dis_weights
+> __log_dir__: the directory to save model, if it None. The model will be save to root_path/logs
+> __summary__: print the summary of model, default is False
 
+```
+from EnHiC import fit
+fit.train(train_data=train_data, valid_data=valid_data, 
+          len_size=400, scale=4, EPOCHS=300, 
+          root_path='./', load_model_dir=None, saved_model_dir=None, log_dir=None,
+          summary=True)
+```
+
+**Prediction**
+We provide the API function for prediction in EnHiC/fit.py
+
+> def predict(model_path, len_size, scale, ds)
+>
+> >__model_path__: the directory to load exsiting generator model e.g. saved_model/gen_model_[len_size]/gen_weights
+> __len_size__: default: 400. The size of sample must be multiples of 4. e.g. 100, 200, 400.
+> __scale__: the scale of resolution to enhance, e.g. 40kb->10kb: 4, 100kb->10kb: 10
+> __ds__: Tensor in format of tensorflow Dataset (None, len_size, len_size, 1) e.g.(None, 400, 400, 1)
+
+```
+from EnHiC import fit
+mpath = os.path.join(root_dir,'saved_model', 'gen_model_{}'.format(len_size), 'gen_weights')
+fit.predict(model_path = mpath, len_size=400, scale=4, ds)
+```
 ---
 
 ##  Demo Test
+We shows the Demo based on _Rao2014-GM12878-MboI-allreps-filtered.10kb.cool_ (same in our paper, around 1.5Gb)
 **Data preprocessing**
-Example:
-> (env_EnHiC)>> python test_preprocessing.py 1 200 2000000
-> (env_EnHiC)>> python test_preprocessing.py 22 200 2000000
+The script _test_preprocessing.py_ prepares the dataset for training. if file doesn't exsit, the script will download it from ftp://cooler.csail.mit.edu/coolers/hg19/ to _[pathto]/EnHiC/data/raw/Rao2014-GM12878-MboI-allreps-filtered.10kb.cool_
+
+Then the script will call _[pathto]/EnHiC/EnHiC/prepare_data.py_ to divide the Hi-C matrix into samples in the size of $( len\_size \times len\_size)$ within the $genomice\_distance$. The samples are saved at _[pathto]/EnHiC/data/_ .
+__Usage__:
+> test_preprocessing.py [chromosome] [len_size] [genomic_distance]
+> __chromosome__: the index of chromosome. e.g. 1, 2, 3, ... , 22, X
+> __len_size__: default: 400. The size of sample must be multiples of 4. e.g. 100, 200, 400.
+> __genomic_distance__: default 2000000 (2Mb)
+
+__Example__:
+```
+> (env_EnHiC)>> python test_preprocessing.py 1 400 2000000
+> (env_EnHiC)>> python test_preprocessing.py 22 400 2000000
+```
 
 **Training**
-Example:
-> (env_EnHiC)>> python test_train.py 200 2000000
+The script _test_train.py_ trains the dataset. The EPOCHS, BATCH_SIZE and chromosome list for training and validation are all configured in the script. It calls _fit.train_ after loading training data.
+As a demo, EPOCHS=100, BATCH_SIZE=9, train_chr_list=['22']
+__Usage__:
+> test_train.py [len_size] [genomic_distance]
+> len_size: default: 400. The size of sample must be multiples of 4. e.g. 100, 200, 400.
+> genomic_distance: default 2000000 (2Mb)
+
+__Example__:
+```
+> (env_EnHiC)>> python test_preprocessing.py 22 400 2000000
+> (env_EnHiC)>> python test_train.py 400 2000000
+```
 
 **Prediction**
+The script test_predict.py shows the demo to predict Hi-C low resoltion by EnHiC. 
+* Load 10kb Hi-C from cool file
+* Downsample 10kb to 40kb
+* Divide into samples in the size of $( len\_size \times len\_size)$ within the $genomice\_distance$
+* Predict low resolution Hi-C samples
+* Combine the samples back into one matrix
 
-Example:
-> (env_EnHiC)>> python test_predict.py 22 200 2000000
+  __Usage__:
+> test_predict.py [chromosome] [len_size] [genomic_distance]
+> chromosome: the index of chromosome. e.g. 1, 2, 3, ... , 22, X
+> len_size: default: 400. The size of sample must be multiples of 4. e.g. 100, 200, 400.
+> genomic_distance: default 2000000 (2Mb)
+
+__Example__:
+```
+> (env_EnHiC)>> python test_predict.py 22 400 2000000
+```
 
 ---

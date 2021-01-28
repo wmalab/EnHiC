@@ -50,6 +50,18 @@ operations.merge_hic(hic_lists, index_1D_2D, max_distance=None)
 ---
 
 ##  Traning and Prediction
+We provide the trained model for data _Rao2014-GM12878-MboI-allreps-filtered.10kb.cool_ at _./pretrained_model/_ with 3 length size (80, 200, 400)
+
+**Example**
+```
+from EnHiC import model
+gan_model_weights_path = os.path.join('.', 'pretrained_model', 'gen_model_400', 'gen_weights')
+Generator = model.make_generator_model(len_high_size=400, scale=4)
+Generator.load_weights(gan_model_weights_path)
+```
+
+Or you can train your own model.
+
 **Training**
 We provide the API function for training data in EnHiC/fit.py
 > def train(train_data, valid_data, len_size, scale, EPOCHS, root_path='./', load_model_dir=None, saved_model_dir=None, log_dir=None, summary=False)<br/>
@@ -125,8 +137,8 @@ As a demo, EPOCHS=100, BATCH_SIZE=9, train_chr_list=['22']
 
 __Usage__:
 > test_train.py [len_size] [genomic_distance]
-> len_size: default: 400. The size of sample must be multiples of 4. e.g. 100, 200, 400.
-> genomic_distance: default 2000000 (2Mb)
+> __len_size__: default: 400. The size of sample must be multiples of 4. e.g. 100, 200, 400. <br/>
+> __genomic_distance__: default 2000000 (2Mb) <br/>
 
 __Example__:
 ```
@@ -144,9 +156,9 @@ The script test_predict.py shows the demo to predict Hi-C low resoltion by EnHiC
 
   __Usage__:
 > test_predict.py [chromosome] [len_size] [genomic_distance]
-> chromosome: the index of chromosome. e.g. 1, 2, 3, ... , 22, X
-> len_size: default: 400. The size of sample must be multiples of 4. e.g. 100, 200, 400.
-> genomic_distance: default 2000000 (2Mb)
+> __chromosome__: the index of chromosome. e.g. 1, 2, 3, ... , 22, X<br/>
+> __len_size__: default: 400. The size of sample must be multiples of 4. e.g. 100, 200, 400.<br/>
+> __genomic_distance__: default 2000000 (2Mb)
 
 __Example__:
 ```

@@ -7,8 +7,8 @@
   - [Setup](#setup)
   - [Data Preparation](#data-preparation)
   - [Traning and Prediction](#traning-and-prediction)
-  - [Demo Test](#demo-test)
   - [TensorBoard](#tensorboard)
+  - [Demo Test](#demo-test)
 
 
 ## About
@@ -87,6 +87,16 @@ from EnHiC import fit
 mpath = os.path.join(root_dir,'saved_model', 'gen_model_{}'.format(len_size), 'gen_weights')
 fit.predict(model_path = mpath, len_size=400, scale=4, ds)
 ```
+
+
+## TensorBoard
+We log training data and visualize it by [TensorBoard](https://www.tensorflow.org/tensorboard/get_started).
+```
+tensorboard --logdir=[pathto]/EnHiC/logs/model/
+or 
+tensorboard --logdir=[pathto]/EnHiC/logs/model/ --port=${port} --host=${node} --samples_per_plugin images=50
+```
+
 ---
 
 ##  Demo Test
@@ -141,14 +151,6 @@ The script test_predict.py shows the demo to predict Hi-C low resoltion by EnHiC
 __Example__:
 ```
 > (env_EnHiC)>> python test_predict.py 22 400 2000000
-```
-
-## TensorBoard
-We log training data and visualize it by [TensorBoard](https://www.tensorflow.org/tensorboard/get_started).
-```
-tensorboard --logdir=[pathto]/EnHiC/logs/model/
-or 
-tensorboard --logdir=[pathto]/EnHiC/logs/model/ --port=${port} --host=${node} --samples_per_plugin images=50
 ```
 
 ---

@@ -21,14 +21,14 @@ We develop a new GAN-based model, namely EnHiC, to enhance the resolution of Hi-
 
 - [ ] Keep updating the document and cleaning code 
 - [ ] Fix the format in GitHub markdown
-
+- [ ] Clean and optimize the model
 ---
 
 ##  Setup
 
 **Anaconda Pyrhon**
 
-We provide a Conda environment for running EnHiC, use the environment.yaml file, which will install all required dependencies:
+We provide a Conda environment for running EnHiC, use the environment.yml file, which will install all required dependencies:
 > conda env create -f environment.yaml
 
 Activate the new environment: 

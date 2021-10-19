@@ -177,7 +177,7 @@ def run(path='./data',
     print('sum Mh - true merge square error: {:.5}'.format(np.sum(diff**2)))
 
     directory_sr = os.path.join(path, sr_path, sr_file, 'SR')
-    compact = idx[0:-residual]
+    compact = idx #idx[0:-residual]
     file = 'predict_chr{}_{}.npz'.format(chromosome, resolution)
     np.savez_compressed(os.path.join(directory_sr, file),
                         hic=predict_hic_hr_merge, compact=compact)

@@ -3,9 +3,7 @@
 
 - [EnHiC: Learning fine-resolution Hi-C contact maps using a generative adversarial framework](#enhic-learning-fine-resolution-hi-c-contact-maps-using-a-generative-adversarial-framework)
   - [About](#about)
-  - [> Hu, Yangyang, and Wenxiu Ma. "EnHiC: learning fine-resolution Hi-C contact maps using a generative adversarial framework." *Bioinformatics* 37.Supplement_1 (2021): i272-i279.](#-hu-yangyang-and-wenxiu-ma-enhic-learning-fine-resolution-hi-c-contact-maps-using-a-generative-adversarial-framework-bioinformatics-37supplement_1-2021-i272-i279)
   - [TODO](#todo)
-  - [- [ ] Clean and optimize the model](#----clean-and-optimize-the-model)
   - [Setup](#setup)
   - [Data Preparation](#data-preparation)
   - [Traning and Prediction](#traning-and-prediction)
@@ -17,14 +15,16 @@
 
 We develop a new GAN-based model, namely EnHiC, to enhance the resolution of Hi-C contact frequency matrices. Specifically, we propose a novel convolutional layer _Decomposition & Reconstruction Block_ which accounts for the non-negative symmetric property of Hi-C matrices. In our GAN framework, the generator extracts rank-1 features from different scales of low-resolution matrices and predicts the high-resolution matrix via subpixel CNN layers.
 
-> Hu, Yangyang, and Wenxiu Ma. "EnHiC: learning fine-resolution Hi-C contact maps using a generative adversarial framework." *Bioinformatics* 37.Supplement_1 (2021): i272-i279.
+> Hu, Yangyang, and Wenxiu Ma. "[EnHiC: learning fine-resolution Hi-C contact maps using a generative adversarial framework](https://academic.oup.com/bioinformatics/article/37/Supplement_1/i272/6319704)." *Bioinformatics* 37.Supplement_1 (2021): i272-i279.
+
 ---
 
 ## TODO
 
 - [ ] Keep updating the document and cleaning code 
-- [ ] Fix the format in GitHub markdown
+- [x] Fix the format in GitHub markdown
 - [ ] Clean and optimize the model
+  
 ---
 
 ##  Setup
@@ -108,7 +108,9 @@ fit.predict(model_path = mpath, len_size=400, scale=4, ds)
 We log training data and visualize it by [TensorBoard](https://www.tensorflow.org/tensorboard/get_started).
 ```
 tensorboard --logdir=[path-to]/EnHiC/logs/model/
+```
 or 
+```
 tensorboard --logdir=[path-to]/EnHiC/logs/model/ --port=${port} --host=${node} --samples_per_plugin images=50
 ```
 

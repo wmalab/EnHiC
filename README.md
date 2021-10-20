@@ -121,9 +121,11 @@ tensorboard --logdir=[path-to]/EnHiC/logs/model/ --port=${port} --host=${node} -
 We shows the Demo based on _Rao2014-GM12878-MboI-allreps-filtered.10kb.cool_ (same in our paper, around 1.5Gb)<br/>
 
 **Data preprocessing**
-The script _test_preprocessing.py_ prepares the dataset for training. if file doesn't exsit, the script will download it from ftp://cooler.csail.mit.edu/coolers/hg19/ to _[path-to]/EnHiC/data/raw/Rao2014-GM12878-MboI-allreps-filtered.10kb.cool_
+The script _test_preprocessing.py_ prepares the dataset for training. if file doesn't exsit, the script will download it from [MIT Hi-C database](ftp://cooler.csail.mit.edu/coolers/hg19/) to 
+_[path-to]/EnHiC/data/raw/Rao2014-GM12878-MboI-allreps-filtered.10kb.cool_
 
-Then the script will call _[path-to]/EnHiC/EnHiC/prepare_data.py_ to divide the Hi-C matrix into samples in the size of ![formula](https://render.githubusercontent.com/render/math?math=(len\_{size}\times{len\_{size}})) within the *genomice_distance*. The samples are saved at _[path-to]/EnHiC/data/_ .
+Then the script will call _[path-to]/EnHiC/EnHiC/prepare_data.py_ to divide the Hi-C matrix into samples in the size of ![formula](https://render.githubusercontent.com/render/math?math=(len\_{size}\times{len\_{size}})) within the *genomice_distance*. The samples are saved at 
+_[path-to]/EnHiC/data/_ .
 __Usage__:
 > test_preprocessing.py [chromosome] [len_size] [genomic_distance]
 > __chromosome__: the index of chromosome. e.g. 1, 2, 3, ... , 22, X <br/>
@@ -141,12 +143,13 @@ The script _test_train.py_ trains the dataset. The EPOCHS, BATCH_SIZE and chromo
 As a demo, EPOCHS=100, BATCH_SIZE=9, train_chr_list=['22']
 
 __Usage__:
-> test_train.py [len_size] [genomic_distance]
+> test_train.py [len_size] [genomic_distance] <br/>
 > __len_size__: default: 400. The size of sample must be multiples of 4. e.g. 100, 200, 400. <br/>
 > __genomic_distance__: default 2000000 (2Mb) <br/>
 
 __Example__:
 ```
+>> conda activate env_EnHiC
 > (env_EnHiC)>> python test_preprocessing.py 22 400 2000000
 > (env_EnHiC)>> python test_train.py 400 2000000
 ```
@@ -160,13 +163,14 @@ The script test_predict.py shows the demo to predict Hi-C low resoltion by EnHiC
 * Combine the samples back into one matrix
 
   __Usage__:
-> test_predict.py [chromosome] [len_size] [genomic_distance]
+> test_predict.py [chromosome] [len_size] [genomic_distance] <br/>
 > __chromosome__: the index of chromosome. e.g. 1, 2, 3, ... , 22, X<br/>
 > __len_size__: default: 400. The size of sample must be multiples of 4. e.g. 100, 200, 400.<br/>
 > __genomic_distance__: default 2000000 (2Mb)
 
 __Example__:
 ```
+>> conda activate env_EnHiC
 > (env_EnHiC)>> python test_predict.py 22 400 2000000
 ```
 

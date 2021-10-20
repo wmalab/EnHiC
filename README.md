@@ -42,7 +42,7 @@ Activate the new environment:
 ##  Data Preparation
 
 As we described in the paper, our model require the input samples are symmeric.
-> The EnHiC divides the Hi-C matrix into non-overlapping sub-matrices in size of ![formula](https://render.githubusercontent.com/render/math?math=\frac{n}{2}\times\frac{n}{2}). and then pick out 3 sub-matrices(2 on the diagonal and 1 off diagonal) to combine one sub-matrix in size of $n \times n$. For example, the 2 sub-matrices on the diagonal are ![formula](https://render.githubusercontent.com/render/math?math=(i,i)) and ![formula](https://render.githubusercontent.com/render/math?math=(j,j)) and the off diagonal sub-matrix is $(i,j)$ so that all ![formula](https://render.githubusercontent.com/render/math?math=n\times\ n) sub-matrices are symmetric. In this section, we select $n=400$ for EnHiC.
+> The EnHiC divides the Hi-C matrix into non-overlapping sub-matrices in size of ![formula](https://render.githubusercontent.com/render/math?math=\frac{n}{2}\times\frac{n}{2}). and then pick out 3 sub-matrices(2 on the diagonal and 1 off diagonal) to combine one sub-matrix in size of $n \times n$. For example, the 2 sub-matrices on the diagonal are ![formula](https://render.githubusercontent.com/render/math?math=(i,i)) and ![formula](https://render.githubusercontent.com/render/math?math=(j,j)) and the off diagonal sub-matrix is ![formula](https://render.githubusercontent.com/render/math?math=(i,j)) so that all ![formula](https://render.githubusercontent.com/render/math?math=n\times{n}) sub-matrices are symmetric. In this section, we select n=400 for EnHiC.
 
 We provide funtions in utils/operations.py， more details please check the demo test.
 ```

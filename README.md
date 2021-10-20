@@ -42,7 +42,7 @@ Activate the new environment:
 ##  Data Preparation
 
 As we described in the paper, our model require the input samples are symmeric.
-> The EnHiC divides the Hi-C matrix into non-overlapping sub-matrices in size of ![formula](https://render.githubusercontent.com/render/math?math=\frac{n}{2}\times\frac{n}{2}). and then pick out 3 sub-matrices(2 on the diagonal and 1 off diagonal) to combine one sub-matrix in size of $n \times n$. For example, the 2 sub-matrices on the diagonal are ![formula](https://render.githubusercontent.com/render/math?math=(i,i)) and ![formula](https://render.githubusercontent.com/render/math?math=(j,j)) and the off diagonal sub-matrix is ![formula](https://render.githubusercontent.com/render/math?math=(i,j)) so that all ![formula](https://render.githubusercontent.com/render/math?math=n\times{n}) sub-matrices are symmetric. In this section, we select n=400 for EnHiC.
+> The EnHiC divides the Hi-C matrix into non-overlapping sub-matrices in size of ![formula](https://render.githubusercontent.com/render/math?math=\frac{n}{2}\times\frac{n}{2}). and then pick out 3 sub-matrices(2 on the diagonal and 1 off diagonal) to combine one sub-matrix in size of ![formula](https://render.githubusercontent.com/render/math?math=n\times{n}). For example, the 2 sub-matrices on the diagonal are ![formula](https://render.githubusercontent.com/render/math?math=(i,i)) and ![formula](https://render.githubusercontent.com/render/math?math=(j,j)) and the off diagonal sub-matrix is ![formula](https://render.githubusercontent.com/render/math?math=(i,j)) so that all ![formula](https://render.githubusercontent.com/render/math?math=n\times{n}) sub-matrices are symmetric. In this section, we select n=400 for EnHiC.
 
 We provide funtions in utils/operations.py， more details please check the demo test.
 ```
@@ -107,9 +107,9 @@ fit.predict(model_path = mpath, len_size=400, scale=4, ds)
 ## TensorBoard
 We log training data and visualize it by [TensorBoard](https://www.tensorflow.org/tensorboard/get_started).
 ```
-tensorboard --logdir=[pathto]/EnHiC/logs/model/
+tensorboard --logdir=[path-to]/EnHiC/logs/model/
 or 
-tensorboard --logdir=[pathto]/EnHiC/logs/model/ --port=${port} --host=${node} --samples_per_plugin images=50
+tensorboard --logdir=[path-to]/EnHiC/logs/model/ --port=${port} --host=${node} --samples_per_plugin images=50
 ```
 
 ---
@@ -119,9 +119,9 @@ tensorboard --logdir=[pathto]/EnHiC/logs/model/ --port=${port} --host=${node} --
 We shows the Demo based on _Rao2014-GM12878-MboI-allreps-filtered.10kb.cool_ (same in our paper, around 1.5Gb)<br/>
 
 **Data preprocessing**
-The script _test_preprocessing.py_ prepares the dataset for training. if file doesn't exsit, the script will download it from ftp://cooler.csail.mit.edu/coolers/hg19/ to _[pathto]/EnHiC/data/raw/Rao2014-GM12878-MboI-allreps-filtered.10kb.cool_
+The script _test_preprocessing.py_ prepares the dataset for training. if file doesn't exsit, the script will download it from ftp://cooler.csail.mit.edu/coolers/hg19/ to _[path-to]/EnHiC/data/raw/Rao2014-GM12878-MboI-allreps-filtered.10kb.cool_
 
-Then the script will call _[pathto]/EnHiC/EnHiC/prepare_data.py_ to divide the Hi-C matrix into samples in the size of $( len\_size \times len\_size)$ within the $genomice\_distance$. The samples are saved at _[pathto]/EnHiC/data/_ .
+Then the script will call _[path-to]/EnHiC/EnHiC/prepare_data.py_ to divide the Hi-C matrix into samples in the size of ![formula](https://render.githubusercontent.com/render/math?math=(len\_{size}\times{len\_{size}})) within the *genomice_distance*. The samples are saved at _[path-to]/EnHiC/data/_ .
 __Usage__:
 > test_preprocessing.py [chromosome] [len_size] [genomic_distance]
 > __chromosome__: the index of chromosome. e.g. 1, 2, 3, ... , 22, X <br/>
